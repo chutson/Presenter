@@ -25,7 +25,11 @@
                 <MenuItem Header="Exit" />
             </MenuItem>
             <MenuItem Header="Edit" />
-            <MenuItem Header="View" />
+            <MenuItem Header="_Presentation">
+                <MenuItem Header="_Start" Command="{Binding StartPresentationCommand}" />
+                <MenuItem Header="_Next" Command="{Binding NextCommand}" />
+                <MenuItem Header="_End" Command="{Binding EndCommand}" />
+            </MenuItem>
         </Menu>
         <userControls:MediaExplorer x:Name="MediaExplorer" Grid.Row="1" Grid.Column="0" DataContext="{Binding MediaExplorerViewModel}" Grid.ColumnSpan="2" />
         <GridSplitter Grid.Row="1" Width="3" Height="Auto" HorizontalAlignment="Left" Margin="13,0,0,0" Grid.Column="1" />

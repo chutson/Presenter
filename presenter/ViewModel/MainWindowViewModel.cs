@@ -43,6 +43,25 @@ namespace presenter.ViewModel
             MessageBox.Show("Import Complete");
         }
 
+        [RelayCommand]
+        private void StartPresentation()
+        {
+            _messenger.Send(new PresentationEventMessage(PresentationEventType.Start));
+
+        }
+
+        [RelayCommand]
+        private void Next()
+        {
+            _messenger.Send(new PresentationEventMessage(PresentationEventType.Next));
+        }
+
+        [RelayCommand]
+        private void End()
+        {
+            _messenger.Send(new PresentationEventMessage(PresentationEventType.Stop));
+        }
+
         private async Task ConvertAndSave(string[] files)
         {
             await Task.Run(() => { foreach (string file in files)
@@ -52,12 +71,6 @@ namespace presenter.ViewModel
                     SongContext.SaveChanges();
                 }
             });
-        }
-
-        public void Present()
-        {
-            
-                _messenger.Send<PresentMessage>();
         }
     }
 }

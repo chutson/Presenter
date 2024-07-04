@@ -23,14 +23,6 @@
         <ListView Grid.Row="1" Grid.Column="0" Name="lvPlaylist" ItemsSource="{Binding Playlist}" SelectedItem="{Binding SelectedSong}" VerticalAlignment="Stretch" />
         <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Name="grdContent">
             <Image Name="imgContent" Source="{Binding SelectedSong.Slides[0].Image, Converter={StaticResource HexImageConverter}}" />
-            <!--<Grid.RowDefinitions>
-                
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>-->
         </Grid>
     </Grid>
 </UserControl>

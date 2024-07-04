@@ -4,9 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:presenter.View"
-        mc:Ignorable="d"
-        Title="PresentationWindow" Height="450" Width="800">
+        xmlns:presenter="clr-namespace:presenter"
+        mc:Ignorable="d" Height="450" Width="800" WindowStyle="None" Background="Black">
+    <Window.Resources>
+        <presenter:HexImageConverter x:Key="HexImageConverter" />
+    </Window.Resources>
     <Grid>
-        
+        <Image Name="imgContent" Source="{Binding Image.Image, Converter={StaticResource HexImageConverter}}" Stretch="Fill" />
     </Grid>
 </Window>

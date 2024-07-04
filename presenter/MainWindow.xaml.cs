@@ -21,7 +21,7 @@ namespace presenter
         {
             if (e.Key == Key.P)
             {
-                ViewModel.Present();
+                //ViewModel.StartPresentation();
             }
         }
     }

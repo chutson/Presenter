@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using presenter.ViewModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Windows.Navigation;
 
 namespace presenter.View
 {
@@ -19,9 +9,17 @@ namespace presenter.View
     /// </summary>
     public partial class PresentationWindow : Window
     {
-        public PresentationWindow()
+        public PresentationWindow(PresentationWindowViewModel viewModel)
         {
+            DataContext = viewModel;
+            this.Loaded += new RoutedEventHandler(Window_Loaded);
             InitializeComponent();
+            imgContent.Visibility = Visibility.Visible;
+        }
+
+        void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Maximized;
         }
     }
 }
