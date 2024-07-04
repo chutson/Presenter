@@ -1,22 +1,23 @@
 ﻿using System.IO;
 using Microsoft.Office.Interop.PowerPoint;
+using presenter.Models;
 
 namespace presenter
 {
-    class PptToBinaryConverter
+    static class PptToBinaryConverter
     {
-        public static Data.Song ConvertToSong(string file)
+        public static Song ConvertToSong(string file)
         {
             if (!File.Exists(file) || Path.GetExtension(file) != ".pptx")
                 throw new FileNotFoundException(file);
 
             var filename = Path.GetFileNameWithoutExtension(file);
-            var song = new Data.Song
+            var song = new Song
             {
                 Title = filename
             };
 
-            // Create a temp directory to hold image files
+            // create a temp directory to hold image files
             var tempDir = Directory.CreateTempSubdirectory();
 
             try
@@ -36,7 +37,7 @@ namespace presenter
                 var index = 1;
                 foreach (FileInfo imageFile in tempDir.GetFiles().OrderBy(f => Convert.ToInt32(f.Name)))
                 {
-                    var songImage = new Data.SongImage() { Verse = "1", ImageNumber = imageFile.Name };
+                    var songImage = new SongImage() { Verse = "1", ImageNumber = imageFile.Name };
                     var imageBytes = File.ReadAllBytes(imageFile.FullName);
                     songImage.Image = Convert.ToHexString(imageBytes);
 

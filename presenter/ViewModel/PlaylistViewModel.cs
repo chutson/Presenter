@@ -1,24 +1,23 @@
-﻿using Data;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
-using presenter.Model;
-using Microsoft.Office.Interop.PowerPoint;
 using System.IO;
 using System.Windows.Media.Imaging;
+using presenter.Messages;
+using presenter.Models;
 
 namespace presenter.ViewModel
 {
     [ObservableObject]
     [ObservableRecipient]
-    public partial class PlaylistViewModel : IRecipient<AddToPlaylistMessage>
+    public partial class PlaylistViewModel : IRecipient<AddToPlaylistMessage>, IRecipient<PresentMessage>
     {
         public ObservableCollection<Song> Playlist { get; set; }
         public PlaylistViewModel(IMessenger messenger)
         {
             Playlist = new ObservableCollection<Song>();
             Messenger = messenger ?? throw new ArgumentNullException(nameof(messenger));
-            Messenger.Register(this);
+            Messenger.RegisterAll(this);
         }
 
         private Song _selectedSong;
@@ -36,22 +35,10 @@ namespace presenter.ViewModel
         {
             Playlist.Add(message.Song);
         }
-        private static BitmapImage LoadImage(byte[] imageData)
+
+        void IRecipient<PresentMessage>.Receive(PresentMessage message)
         {
-            if (imageData == null || imageData.Length == 0) return null;
-            var image = new BitmapImage();
-            using (var mem = new MemoryStream(imageData))
-            {
-                mem.Position = 0;
-                image.BeginInit();
-                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.UriSource = null;
-                image.StreamSource = mem;
-                image.EndInit();
-                //image.Freeze();
-            }
-            return image;
+            throw new NotImplementedException();
         }
     }
 }

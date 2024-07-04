@@ -14,11 +14,12 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="233.557" />
+            <ColumnDefinition Width="16.443"/>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Menu Grid.Row="0" Grid.ColumnSpan="3">
+        <Menu Grid.Row="0" Grid.ColumnSpan="4">
             <MenuItem Header="File">
                 <MenuItem Header="Import" Command="{Binding ImportCommand}" />
                 <MenuItem Header="Exit" />
@@ -26,8 +27,8 @@
             <MenuItem Header="Edit" />
             <MenuItem Header="View" />
         </Menu>
-        <userControls:MediaExplorer x:Name="MediaExplorer" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" DataContext="{Binding MediaExplorerViewModel}" />
-        <GridSplitter Grid.Row="1" Grid.RowSpan="2" Width="3" Height="Auto" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0" />
-        <userControls:PlaylistView Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch" DataContext="{Binding PlaylistViewModel}" />
+        <userControls:MediaExplorer x:Name="MediaExplorer" Grid.Row="1" Grid.Column="0" DataContext="{Binding MediaExplorerViewModel}" Grid.ColumnSpan="2" />
+        <GridSplitter Grid.Row="1" Width="3" Height="Auto" HorizontalAlignment="Left" Margin="13,0,0,0" Grid.Column="1" />
+        <userControls:PlaylistView Grid.Row="1" Grid.Column="2" DataContext="{Binding PlaylistViewModel}" Grid.ColumnSpan="2" />
     </Grid>
 </Window>

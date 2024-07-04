@@ -1,18 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using Data;
-using Microsoft.Office.Core;
 using Microsoft.Win32;
-using presenter.Model;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using presenter.Messages;
+using presenter.Services;
 using System.Windows;
-using System.Windows.Media.Imaging;
+using System.Windows.Input;
 
 namespace presenter.ViewModel
 {
@@ -59,6 +52,12 @@ namespace presenter.ViewModel
                     SongContext.SaveChanges();
                 }
             });
+        }
+
+        public void Present()
+        {
+            
+                _messenger.Send<PresentMessage>();
         }
     }
 }

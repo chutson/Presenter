@@ -1,8 +1,5 @@
-﻿using System.IO;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using presenter.View.UserControls;
+﻿using System.Windows;
+using System.Windows.Input;
 using presenter.ViewModel;
 
 namespace presenter
@@ -17,8 +14,15 @@ namespace presenter
         {
             DataContext = ViewModel = viewModel;
             InitializeComponent();
+            this.KeyDown += new System.Windows.Input.KeyEventHandler(MainWindow_KeyDown);
         }
 
-        
+        void MainWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.P)
+            {
+                ViewModel.Present();
+            }
+        }
     }
 }

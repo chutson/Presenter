@@ -1,7 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
-using Data;
-using presenter.Model;
+using presenter.Messages;
+using presenter.Models;
+using presenter.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Data;
 
