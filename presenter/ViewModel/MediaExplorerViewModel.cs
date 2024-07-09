@@ -13,14 +13,18 @@ namespace presenter.ViewModel
     [ObservableRecipient]
     public partial class MediaExplorerViewModel : IRecipient<ImportMessage>
     {
-        private readonly SongContext _SongContext;
+        [ObservableProperty]
+        private string? _searchText;
+        [ObservableProperty]
+        private Song? _selectedSong;
+        private readonly SongContext _songContext;
         public ObservableCollection<Song> Songs { get; set; }
         public CollectionViewSource FilteredSongs { get; set; } = new CollectionViewSource();
 
         public MediaExplorerViewModel(IMessenger messenger, SongContext songContext) 
         {
             Messenger = messenger ?? throw new ArgumentNullException(nameof(messenger));
-            _SongContext = songContext ?? throw new ArgumentNullException(nameof(songContext));
+            _songContext = songContext ?? throw new ArgumentNullException(nameof(songContext));
             Messenger.Register(this);
             
             RefreshSongs();
@@ -28,19 +32,14 @@ namespace presenter.ViewModel
             FilteredSongs.View.Filter = SongFilter;
         }
 
-        [ObservableProperty]
-        private string? _searchText;
         partial void OnSearchTextChanged(string? value)
         {
             FilteredSongs.View.Refresh();
         }
 
-        [ObservableProperty]
-        private Song? _selectedSong;
-
         public void AddSelectedItemToPlaylist()
         {
-            Messenger.Send(new AddToPlaylistMessage(_selectedSong));
+            Messenger.Send(new AddToPlaylistMessage(SelectedSong));
         }
 
         private bool SongFilter(object item)
@@ -48,15 +47,18 @@ namespace presenter.ViewModel
             if (string.IsNullOrEmpty(SearchText))
                 return true;
 
-            if (int.TryParse(SearchText, out _))
-                return (item as Song).Number.StartsWith(SearchText);
+            if (item is not Song song)
+                return false;
 
-            return (item as Song).Title.StartsWith(SearchText, StringComparison.OrdinalIgnoreCase);
+            if (int.TryParse(SearchText, out _))
+                return song.Number != null && song.Number.StartsWith(SearchText);
+
+            return song.Title != null && song.Title.StartsWith(SearchText, StringComparison.OrdinalIgnoreCase);
         }
 
         private void RefreshSongs()
         {
-            Songs = new ObservableCollection<Song>(_SongContext.Songs);
+            Songs = new ObservableCollection<Song>(_songContext.Songs);
         }
 
         void IRecipient<ImportMessage>.Receive(ImportMessage message)

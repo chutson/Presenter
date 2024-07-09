@@ -13,9 +13,6 @@
     <Compile Update="View\UserControls\MediaExplorer.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\UserControls\MenuBar.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\UserControls\PlaylistView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,9 +25,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\MediaExplorer.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\UserControls\MenuBar.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\PlaylistView.xaml">

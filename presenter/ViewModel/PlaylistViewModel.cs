@@ -23,15 +23,15 @@ namespace presenter.ViewModel
             Messenger.RegisterAll(this);
         }
 
+        [ObservableProperty]
         private Song _selectedSong;
-        public Song SelectedSong
+
+        [ObservableProperty]
+        private SongImage _currentSlide;
+
+        partial void OnSelectedSongChanged(Song value)
         {
-            get { return _selectedSong; }
-            set
-            {
-                _selectedSong = value;
-                OnPropertyChanged();
-            }
+            CurrentSlide = value.Slides.First();
         }
 
         public void Receive(AddToPlaylistMessage message)
@@ -47,7 +47,7 @@ namespace presenter.ViewModel
                     StartPresentation();
                     break;
                 case PresentationEventType.Next: 
-                    Messenger.Send(new ShowSlideMessage(_selectedSong.Slides.Last()));
+                    Messenger.Send(new ShowSlideMessage(SelectedSong.Slides.Last()));
                     break;
                 case PresentationEventType.Previous:
                     break;
@@ -59,7 +59,8 @@ namespace presenter.ViewModel
 
         private void StartPresentation()
         {
-            _presentationWindow = new PresentationWindow(new PresentationWindowViewModel(Messenger, SelectedSong.Slides.First()));
+            CurrentSlide = SelectedSong.Slides.First();
+            _presentationWindow = new PresentationWindow(this);
             foreach (Screen screen in Screen.AllScreens)
             {
                 if (screen.Primary)
@@ -78,6 +79,8 @@ namespace presenter.ViewModel
             _presentationWindow.Height = workingArea.Height;
 
             _presentationWindow.Show();
+            
+            // todo: return focus to main window
         }
     }
 }

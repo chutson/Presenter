@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:presenter.View"
         xmlns:presenter="clr-namespace:presenter"
-        mc:Ignorable="d" Height="450" Width="800" WindowStyle="None" Background="Black">
+        mc:Ignorable="d" Height="450" Width="800" 
+        Loaded="Window_Loaded" WindowStyle="None" Background="Black">
     <Window.Resources>
         <presenter:HexImageConverter x:Key="HexImageConverter" />
     </Window.Resources>
     <Grid>
-        <Image Name="imgContent" Source="{Binding Image.Image, Converter={StaticResource HexImageConverter}}" Stretch="Fill" />
+        <Image Name="imgContent" Source="{Binding CurrentSlide.Image, Converter={StaticResource HexImageConverter}}" Stretch="Fill" />
     </Grid>
 </Window>

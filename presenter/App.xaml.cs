@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using presenter.ViewModel;
 using presenter.Services;
 using System.Windows;
+using presenter.View.UserControls;
 
 namespace presenter
 {
@@ -33,8 +34,8 @@ namespace presenter
                 services.AddSingleton<IMessenger, WeakReferenceMessenger>();
                 services.AddSingleton<MainWindow>();
                 services.AddSingleton<MainWindowViewModel>();
-                services.AddSingleton<MenuBarViewModel>();
                 services.AddSingleton<MediaExplorerViewModel>();
+                services.AddSingleton<PlaylistView>();
                 services.AddSingleton<PlaylistViewModel>();
                 services.AddDbContext<SongContext>(options => options.UseSqlite(@"Data Source=C:\Users\Caleb\Desktop\song_manager\Songs.db"));
             });

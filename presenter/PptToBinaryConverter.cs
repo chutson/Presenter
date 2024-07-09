@@ -6,6 +6,12 @@ namespace presenter
 {
     static class PptToBinaryConverter
     {
+        /// <summary>
+        /// Converts a .pptx file to a Song
+        /// </summary>
+        /// <param name="file">Full path of the .pptx file</param>
+        /// <returns>A Song containing all slides from the .pptx file</returns>
+        /// <exception cref="FileNotFoundException">The file was not a .pptx file or was not found</exception>
         public static Song ConvertToSong(string file)
         {
             if (!File.Exists(file) || Path.GetExtension(file) != ".pptx")
@@ -52,15 +58,18 @@ namespace presenter
             return song;
         }
 
+        /// <summary>
+        /// Update a .ppt file to .pptx
+        /// </summary>
+        /// <param name="dir"></param>
         public static void UpgradeToPptx(string dir)
         {
-            var saveDir = Path.Join(dir, "new");
             var ppApp = new Application();
             foreach (var file in Directory.GetFiles(dir).Where(f => f.EndsWith(".ppt")))
             {
                 var newFileName = $"{Path.GetFileNameWithoutExtension(file)}.pptx";
                 var presentation = ppApp.Presentations.Open(file, 0, 0, 0);
-                presentation.SaveAs(Path.Join(saveDir, newFileName), PpSaveAsFileType.ppSaveAsOpenXMLPresentation);
+                presentation.SaveAs(Path.Join(dir, newFileName), PpSaveAsFileType.ppSaveAsOpenXMLPresentation);
                 presentation.Close();
             }
             ppApp.Quit();

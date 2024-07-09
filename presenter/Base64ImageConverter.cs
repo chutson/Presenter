@@ -6,11 +6,17 @@ namespace presenter
 {
     public class HexImageConverter : IValueConverter
     {
+        /// <summary>
+        /// Implementation for converting a hex string into an image
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var s = value as string;
-
-            if (s == null)
+            if (value is not string s)
                 return null;
 
             var image = new BitmapImage();

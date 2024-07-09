@@ -6,33 +6,39 @@
         xmlns:local="clr-namespace:presenter"
         xmlns:userControls="clr-namespace:presenter.View.UserControls"
         xmlns:vm="clr-namespace:presenter.ViewModel"
-        mc:Ignorable="d"
+        mc:Ignorable="d" KeyDown="MainWindow_KeyDown" MouseLeftButtonDown="Window_MouseLeftButtonDown" WindowStyle="None"
         Title="Presenter" Height="450" Width="800">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="3" CornerRadius="0" CaptionHeight="0" />
+    </WindowChrome.WindowChrome>
     <Grid Name="grdMain">
         <Grid.RowDefinitions>
-            <RowDefinition Height="20" />
+            <RowDefinition Height="25" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="233.557" />
-            <ColumnDefinition Width="16.443"/>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Menu Grid.Row="0" Grid.ColumnSpan="4">
-            <MenuItem Header="File">
-                <MenuItem Header="Import" Command="{Binding ImportCommand}" />
-                <MenuItem Header="Exit" />
+        <Menu Grid.ColumnSpan="2" VerticalAlignment="Center" Background="Transparent">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Import" Command="{Binding ImportCommand}" />
+                <MenuItem Header="E_xit" Command="{Binding ExitCommand}" />
             </MenuItem>
-            <MenuItem Header="Edit" />
             <MenuItem Header="_Presentation">
-                <MenuItem Header="_Start" Command="{Binding StartPresentationCommand}" />
-                <MenuItem Header="_Next" Command="{Binding NextCommand}" />
-                <MenuItem Header="_End" Command="{Binding EndCommand}" />
+                <MenuItem Header="_Start" Command="{Binding StartPresentationCommand}" InputGestureText="F5" />
+                <MenuItem Header="_Next" Command="{Binding NextCommand}" InputGestureText="→, ↓" />
+                <MenuItem Header="_Previous" Command="{Binding PreviousCommand}" InputGestureText="←, ↑" />
+                <MenuItem Header="_End" Command="{Binding EndCommand}" InputGestureText="esc" />
             </MenuItem>
         </Menu>
-        <userControls:MediaExplorer x:Name="MediaExplorer" Grid.Row="1" Grid.Column="0" DataContext="{Binding MediaExplorerViewModel}" Grid.ColumnSpan="2" />
-        <GridSplitter Grid.Row="1" Width="3" Height="Auto" HorizontalAlignment="Left" Margin="13,0,0,0" Grid.Column="1" />
-        <userControls:PlaylistView Grid.Row="1" Grid.Column="2" DataContext="{Binding PlaylistViewModel}" Grid.ColumnSpan="2" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="0,0,0,0">
+            <Button x:Name="btnMinimize" Content="_" BorderBrush="Transparent" Background="Transparent" Height="25" Width="25" Click="btnMinimize_Click" />
+            <Button x:Name="btnMaximize" Content="🗖" BorderBrush="Transparent" Background="Transparent" Height="25" Width="25" Click="btnMaximize_Click" />
+            <Button x:Name="btnClose" Content="X" BorderBrush="Transparent" Background="Transparent" Height="25" Width="25" Click="btnClose_Click" />
+        </StackPanel>
+        <userControls:MediaExplorer x:Name="MediaExplorer" Grid.Row="1" Grid.Column="0" DataContext="{Binding MediaExplorerViewModel}" />
+        <GridSplitter Grid.Row="1" Width="3" Height="Auto" HorizontalAlignment="Right" Grid.Column="0" />
+        <userControls:PlaylistView Grid.Row="1" Grid.Column="1" DataContext="{Binding PlaylistViewModel}" />
     </Grid>
 </Window>

@@ -5,7 +5,6 @@ using Microsoft.Win32;
 using presenter.Messages;
 using presenter.Services;
 using System.Windows;
-using System.Windows.Input;
 
 namespace presenter.ViewModel
 {
@@ -71,6 +70,12 @@ namespace presenter.ViewModel
                     SongContext.SaveChanges();
                 }
             });
+        }
+
+        [RelayCommand]
+        private void Exit()
+        {
+            Application.Current.Shutdown();
         }
     }
 }

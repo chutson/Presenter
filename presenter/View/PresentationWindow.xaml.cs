@@ -9,7 +9,7 @@ namespace presenter.View
     /// </summary>
     public partial class PresentationWindow : Window
     {
-        public PresentationWindow(PresentationWindowViewModel viewModel)
+        public PresentationWindow(PlaylistViewModel viewModel)
         {
             DataContext = viewModel;
             this.Loaded += new RoutedEventHandler(Window_Loaded);

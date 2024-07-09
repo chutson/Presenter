@@ -1,5 +1,4 @@
-﻿using Microsoft.Office.Interop.PowerPoint;
-using presenter.ViewModel;
+﻿using presenter.ViewModel;
 using presenter.Models;
 using System.Windows.Controls;
 
@@ -10,34 +9,30 @@ namespace presenter.View.UserControls
     /// </summary>
     public partial class PlaylistView : UserControl
     {
-        private PlaylistViewModel ViewModel { get; }
+        private PlaylistViewModel _viewModel { get; }
         public PlaylistView()
         {
             InitializeComponent();
         }
         public PlaylistView(PlaylistViewModel viewModel)
         {
-            DataContext = ViewModel = ViewModel;
+            DataContext = _viewModel = _viewModel;
             InitializeComponent();
         }
 
-        public void RefreshGrid()
+        private void trvPlaylist_SelectedItemChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<object> e)
         {
-            var thumbnailCount = ViewModel.Playlist.Sum(s => s.Slides.Count);
-            for (var i = 0; i < thumbnailCount / 3; i++)
-            {
-                grdContent.RowDefinitions.Add(new RowDefinition());
-            }
+            var song = e.NewValue as Song;
 
-            foreach (Song song in ViewModel.Playlist)
+            switch (e.NewValue)
             {
-                foreach (Slide slide in song.Slides)
-                {
-
-                }
+                case Song s:
+                    ((PlaylistViewModel)DataContext).SelectedSong = s;
+                    break;
+                case SongImage i:
+                    ((PlaylistViewModel)DataContext).CurrentSlide = i;
+                    break;
             }
         }
-
-
     }
 }

@@ -14,5 +14,10 @@ namespace presenter.Models
         public string Image {  get; set; }
 
         public virtual Song Song { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Verse}-{ImageNumber}"; 
+        }
     }
 }
