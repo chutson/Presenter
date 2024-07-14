@@ -26,7 +26,6 @@ namespace presenter
         {
             switch(e.Key)
             {
-                case Key.P:
                 case Key.F5:
                     _viewModel.StartPresentationCommand.Execute(this);
                     break;

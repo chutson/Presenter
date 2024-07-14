@@ -40,8 +40,8 @@
                 </MenuItem>
                 <MenuItem Header="_Presentation">
                     <MenuItem Header="_Start" Command="{Binding StartPresentationCommand}" InputGestureText="F5" />
-                    <MenuItem Header="_Next" Command="{Binding NextCommand}" InputGestureText="→, ↓" />
-                    <MenuItem Header="_Previous" Command="{Binding PreviousCommand}" InputGestureText="←, ↑" />
+                    <!--<MenuItem Header="_Next" Command="{Binding NextCommand}" InputGestureText="→, ↓" />
+                    <MenuItem Header="_Previous" Command="{Binding PreviousCommand}" InputGestureText="←, ↑" />-->
                     <MenuItem Header="_End" Command="{Binding EndCommand}" InputGestureText="esc" />
                 </MenuItem>
             </Menu>

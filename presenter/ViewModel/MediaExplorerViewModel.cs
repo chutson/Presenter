@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using presenter.Messages;
 using presenter.Models;
@@ -13,6 +14,9 @@ namespace presenter.ViewModel
     [ObservableRecipient]
     public partial class MediaExplorerViewModel : IRecipient<ImportMessage>
     {
+        private const string SEARCH_LABEL_DEFAULT = "Search...";
+        [ObservableProperty]
+        private string? _searchLabel = SEARCH_LABEL_DEFAULT;
         [ObservableProperty]
         private string? _searchText;
         [ObservableProperty]
@@ -34,12 +38,24 @@ namespace presenter.ViewModel
 
         partial void OnSearchTextChanged(string? value)
         {
+            if (string.IsNullOrWhiteSpace(value))
+                SearchLabel = SEARCH_LABEL_DEFAULT;
+            else
+                SearchLabelClear();
+
             FilteredSongs.View.Refresh();
         }
 
         public void AddSelectedItemToPlaylist()
         {
             Messenger.Send(new AddToPlaylistMessage(SelectedSong));
+        }
+
+        [RelayCommand]
+        public void SearchLabelClear()
+        {
+            SearchLabel = "";
+
         }
 
         private bool SongFilter(object item)

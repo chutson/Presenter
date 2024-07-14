@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using presenter.Messages;
 using presenter.Models;
@@ -44,7 +45,7 @@ namespace presenter.ViewModel
             switch (message.EventType)
             {
                 case PresentationEventType.Start:
-                    StartPresentation();
+                        StartPresentation();
                     break;
                 case PresentationEventType.Next:
                     //Messenger.Send(new ShowSlideMessage(SelectedSong.Slides.Last()));
@@ -52,13 +53,16 @@ namespace presenter.ViewModel
                 case PresentationEventType.Previous:
                     break;
                 case PresentationEventType.Stop:
-                    _presentationWindow.Close();
+                    _presentationWindow?.Close();
                     break;
             }
         }
 
         private void StartPresentation()
         {
+            if (Playlist.Count <= 0 || _presentationWindow != null && _presentationWindow.IsVisible)
+                return;
+
             _presentationWindow = new PresentationWindow(this);
             foreach (Screen screen in Screen.AllScreens)
             {
@@ -78,6 +82,12 @@ namespace presenter.ViewModel
             _presentationWindow.Height = workingArea.Height;
 
             _presentationWindow.Show();
+        }
+
+        [RelayCommand]
+        private void RemoveFromPlaylist()
+        {
+            Playlist.Remove(SelectedSong);
         }
     }
 }

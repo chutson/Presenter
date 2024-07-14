@@ -9,14 +9,15 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
-            <RowDefinition Height="20" />
+            <RowDefinition Height="25" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <TextBlock Name="tbHeader" Text="Media" Background="DarkGray" FontWeight="Bold" Padding="5,2,0,0" />
         </Grid>
         <Grid Grid.Row="1">
-            <TextBox Name="txtSearch" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox x:Name="txtSearch" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" FontSize="16" BorderThickness="0" Background="Transparent" />
+            <TextBlock Name="txtSearchlabel" Text="{Binding SearchLabel}" Foreground="DarkGray" FontSize="16" FontStyle="Italic" VerticalAlignment="Center" Background="Transparent" Padding="3,0,0,0" Panel.ZIndex="-1" />
         </Grid>
         <Grid Grid.Row="2">
             <ListView Name="lvLibrary" ItemsSource="{Binding FilteredSongs.View}" SelectedItem="{Binding SelectedSong}" MouseDoubleClick="lvLibrary_MouseDoubleClick">

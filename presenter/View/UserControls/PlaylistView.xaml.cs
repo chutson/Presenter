@@ -1,6 +1,9 @@
 ﻿using presenter.ViewModel;
 using presenter.Models;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows;
 
 namespace presenter.View.UserControls
 {
@@ -10,10 +13,6 @@ namespace presenter.View.UserControls
     public partial class PlaylistView : UserControl
     {
         private PlaylistViewModel _viewModel { get; }
-        //public PlaylistView()
-        //{
-        //    InitializeComponent();
-        //}
         public PlaylistView(PlaylistViewModel viewModel)
         {
             DataContext = _viewModel = viewModel;
@@ -34,6 +33,36 @@ namespace presenter.View.UserControls
                     _viewModel.CurrentSlide = i;
                     break;
             }
+        }
+
+        /// <summary>
+        /// Puts focus on the TreeViewItem that was right clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void trvPlaylist_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var treeViewItem = VisualUpwardSearch(e.OriginalSource as DependencyObject);
+
+            if (treeViewItem != null)
+            {
+                treeViewItem.Focus();
+                e.Handled = true;
+            }
+        }
+        private static TreeViewItem? VisualUpwardSearch(DependencyObject? source)
+        {
+            while (source != null && source is not TreeViewItem)
+            {
+                source = VisualTreeHelper.GetParent(source);
+            }
+
+            return source as TreeViewItem;
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            _viewModel.RemoveFromPlaylistCommand.Execute(e);
         }
     }
 }

@@ -25,6 +25,7 @@ namespace presenter.View.UserControls
         private void lvLibrary_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ((MediaExplorerViewModel)DataContext).AddSelectedItemToPlaylist();
+            this.txtSearch.Focus();
         }
     }
 }
