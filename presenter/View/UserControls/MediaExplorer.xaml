@@ -16,11 +16,11 @@
             <TextBlock Name="tbHeader" Text="Media" Background="DarkGray" FontWeight="Bold" Padding="5,2,0,0" />
         </Grid>
         <Grid Grid.Row="1">
-            <TextBox x:Name="txtSearch" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" FontSize="16" BorderThickness="0" Background="Transparent" />
+            <TextBox x:Name="txtSearch" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" FontSize="16" BorderThickness="0" Background="Transparent" PreviewKeyDown="txtSearch_PreviewKeyDown" />
             <TextBlock Name="txtSearchlabel" Text="{Binding SearchLabel}" Foreground="DarkGray" FontSize="16" FontStyle="Italic" VerticalAlignment="Center" Background="Transparent" Padding="3,0,0,0" Panel.ZIndex="-1" />
         </Grid>
         <Grid Grid.Row="2">
-            <ListView Name="lvLibrary" ItemsSource="{Binding FilteredSongs.View}" SelectedItem="{Binding SelectedSong}" MouseDoubleClick="lvLibrary_MouseDoubleClick">
+            <ListView Name="lvLibrary" ItemsSource="{Binding FilteredSongs.View}" SelectedItem="{Binding SelectedSong}" MouseDoubleClick="lvLibrary_MouseDoubleClick" PreviewKeyDown="lvLibrary_PreviewKeyDown">
             </ListView>
         </Grid>
     </Grid>

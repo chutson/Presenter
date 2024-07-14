@@ -21,13 +21,11 @@ namespace presenter.View.UserControls
 
         private void trvPlaylist_SelectedItemChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<object> e)
         {
-            var song = e.NewValue as Song;
-
             switch (e.NewValue)
             {
                 case Song s:
                     _viewModel.SelectedSong = s;
-                    _viewModel.CurrentSlide = new SongImage();
+                    _viewModel.CurrentSlide = new SongImage(); // show a blank slide when the song title is selected
                     break;
                 case SongImage i:
                     _viewModel.CurrentSlide = i;
@@ -60,7 +58,7 @@ namespace presenter.View.UserControls
             return source as TreeViewItem;
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void mniRemove_Click(object sender, RoutedEventArgs e)
         {
             _viewModel.RemoveFromPlaylistCommand.Execute(e);
         }

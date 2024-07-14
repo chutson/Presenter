@@ -48,7 +48,6 @@ namespace presenter.ViewModel
                         StartPresentation();
                     break;
                 case PresentationEventType.Next:
-                    //Messenger.Send(new ShowSlideMessage(SelectedSong.Slides.Last()));
                     break;
                 case PresentationEventType.Previous:
                     break;
