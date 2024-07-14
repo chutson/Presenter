@@ -32,11 +32,11 @@ namespace presenter
             .ConfigureServices((hostContext, services) =>
             {
                 services.AddSingleton<IMessenger, WeakReferenceMessenger>();
-                services.AddSingleton<MainWindow>();
                 services.AddSingleton<MainWindowViewModel>();
                 services.AddSingleton<MediaExplorerViewModel>();
-                services.AddSingleton<PlaylistView>();
+                services.AddSingleton<MainWindow>();
                 services.AddSingleton<PlaylistViewModel>();
+                services.AddSingleton<PlaylistView>();
                 services.AddDbContext<SongContext>(options => options.UseSqlite(@"Data Source=C:\Users\Caleb\Desktop\song_manager\Songs.db"));
             });
     }

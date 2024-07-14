@@ -10,13 +10,13 @@ namespace presenter.View.UserControls
     public partial class PlaylistView : UserControl
     {
         private PlaylistViewModel _viewModel { get; }
-        public PlaylistView()
-        {
-            InitializeComponent();
-        }
+        //public PlaylistView()
+        //{
+        //    InitializeComponent();
+        //}
         public PlaylistView(PlaylistViewModel viewModel)
         {
-            DataContext = _viewModel = _viewModel;
+            DataContext = _viewModel = viewModel;
             InitializeComponent();
         }
 
@@ -27,10 +27,11 @@ namespace presenter.View.UserControls
             switch (e.NewValue)
             {
                 case Song s:
-                    ((PlaylistViewModel)DataContext).SelectedSong = s;
+                    _viewModel.SelectedSong = s;
+                    _viewModel.CurrentSlide = new SongImage();
                     break;
                 case SongImage i:
-                    ((PlaylistViewModel)DataContext).CurrentSlide = i;
+                    _viewModel.CurrentSlide = i;
                     break;
             }
         }

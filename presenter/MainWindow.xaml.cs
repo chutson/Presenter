@@ -1,5 +1,7 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using presenter.View.UserControls;
 using presenter.ViewModel;
 
 namespace presenter
@@ -10,10 +12,14 @@ namespace presenter
     public partial class MainWindow : Window
     {
         private MainWindowViewModel _viewModel { get; }
-        public MainWindow(MainWindowViewModel viewModel)
+        public MainWindow(MainWindowViewModel viewModel, PlaylistView playlistView)
         {
             DataContext = _viewModel = viewModel;
             InitializeComponent();
+
+            grdMain.Children.Add(playlistView);
+            Grid.SetRow(playlistView, 1);
+            Grid.SetColumn(playlistView, 1);
         }
 
         void MainWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
@@ -28,6 +34,8 @@ namespace presenter
                     _viewModel.EndCommand.Execute(this);
                     break;
             }
+
+            this.Focus();
         }
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
@@ -47,9 +55,14 @@ namespace presenter
             _viewModel.ExitCommand.Execute(this);
         }
 
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
+        }
+
+        private void Grid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

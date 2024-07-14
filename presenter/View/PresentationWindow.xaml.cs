@@ -14,7 +14,6 @@ namespace presenter.View
             DataContext = viewModel;
             this.Loaded += new RoutedEventHandler(Window_Loaded);
             InitializeComponent();
-            imgContent.Visibility = Visibility.Visible;
         }
 
         void Window_Loaded(object sender, RoutedEventArgs e)

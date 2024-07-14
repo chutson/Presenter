@@ -46,8 +46,8 @@ namespace presenter.ViewModel
                 case PresentationEventType.Start:
                     StartPresentation();
                     break;
-                case PresentationEventType.Next: 
-                    Messenger.Send(new ShowSlideMessage(SelectedSong.Slides.Last()));
+                case PresentationEventType.Next:
+                    //Messenger.Send(new ShowSlideMessage(SelectedSong.Slides.Last()));
                     break;
                 case PresentationEventType.Previous:
                     break;
@@ -59,7 +59,6 @@ namespace presenter.ViewModel
 
         private void StartPresentation()
         {
-            CurrentSlide = SelectedSong.Slides.First();
             _presentationWindow = new PresentationWindow(this);
             foreach (Screen screen in Screen.AllScreens)
             {
@@ -79,8 +78,6 @@ namespace presenter.ViewModel
             _presentationWindow.Height = workingArea.Height;
 
             _presentationWindow.Show();
-            
-            // todo: return focus to main window
         }
     }
 }

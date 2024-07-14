@@ -6,11 +6,9 @@
         xmlns:local="clr-namespace:presenter.View"
         xmlns:presenter="clr-namespace:presenter"
         mc:Ignorable="d" Height="450" Width="800" 
-        Loaded="Window_Loaded" WindowStyle="None" Background="Black">
+        Loaded="Window_Loaded" WindowStyle="None" Background="Black" ShowActivated="False">
     <Window.Resources>
         <presenter:HexImageConverter x:Key="HexImageConverter" />
     </Window.Resources>
-    <Grid>
-        <Image Name="imgContent" Source="{Binding CurrentSlide.Image, Converter={StaticResource HexImageConverter}}" Stretch="Fill" />
-    </Grid>
+    <Image Name="imgContent" Source="{Binding CurrentSlide.Image, Converter={StaticResource HexImageConverter}}" Stretch="Fill" />
 </Window>

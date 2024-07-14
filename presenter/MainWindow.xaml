@@ -6,11 +6,16 @@
         xmlns:local="clr-namespace:presenter"
         xmlns:userControls="clr-namespace:presenter.View.UserControls"
         xmlns:vm="clr-namespace:presenter.ViewModel"
-        mc:Ignorable="d" KeyDown="MainWindow_KeyDown" MouseLeftButtonDown="Window_MouseLeftButtonDown" WindowStyle="None"
-        Title="Presenter" Height="450" Width="800">
+        mc:Ignorable="d" KeyDown="MainWindow_KeyDown" WindowStyle="None"
+        Title="Presenter" Height="600" Width="1000">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="3" CornerRadius="0" CaptionHeight="0" />
     </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:PlaylistViewModel}">
+            <userControls:PlaylistView />
+        </DataTemplate>
+    </Window.Resources>
     <Grid Name="grdMain">
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
@@ -20,18 +25,27 @@
             <ColumnDefinition Width="250" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Menu Grid.ColumnSpan="2" VerticalAlignment="Center" Background="Transparent">
-            <MenuItem Header="_File">
-                <MenuItem Header="_Import" Command="{Binding ImportCommand}" />
-                <MenuItem Header="E_xit" Command="{Binding ExitCommand}" />
-            </MenuItem>
-            <MenuItem Header="_Presentation">
-                <MenuItem Header="_Start" Command="{Binding StartPresentationCommand}" InputGestureText="F5" />
-                <MenuItem Header="_Next" Command="{Binding NextCommand}" InputGestureText="→, ↓" />
-                <MenuItem Header="_Previous" Command="{Binding PreviousCommand}" InputGestureText="←, ↑" />
-                <MenuItem Header="_End" Command="{Binding EndCommand}" InputGestureText="esc" />
-            </MenuItem>
-        </Menu>
+        <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown" PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown" Grid.ColumnSpan="3">
+            <Grid.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Menu VerticalAlignment="Center" Background="Transparent">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_Import" Command="{Binding ImportCommand}" />
+                    <MenuItem Header="E_xit" Command="{Binding ExitCommand}" />
+                </MenuItem>
+                <MenuItem Header="_Presentation">
+                    <MenuItem Header="_Start" Command="{Binding StartPresentationCommand}" InputGestureText="F5" />
+                    <MenuItem Header="_Next" Command="{Binding NextCommand}" InputGestureText="→, ↓" />
+                    <MenuItem Header="_Previous" Command="{Binding PreviousCommand}" InputGestureText="←, ↑" />
+                    <MenuItem Header="_End" Command="{Binding EndCommand}" InputGestureText="esc" />
+                </MenuItem>
+            </Menu>
+        </Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="0,0,0,0">
             <Button x:Name="btnMinimize" Content="_" BorderBrush="Transparent" Background="Transparent" Height="25" Width="25" Click="btnMinimize_Click" />
             <Button x:Name="btnMaximize" Content="🗖" BorderBrush="Transparent" Background="Transparent" Height="25" Width="25" Click="btnMaximize_Click" />
@@ -39,6 +53,6 @@
         </StackPanel>
         <userControls:MediaExplorer x:Name="MediaExplorer" Grid.Row="1" Grid.Column="0" DataContext="{Binding MediaExplorerViewModel}" />
         <GridSplitter Grid.Row="1" Width="3" Height="Auto" HorizontalAlignment="Right" Grid.Column="0" />
-        <userControls:PlaylistView Grid.Row="1" Grid.Column="1" DataContext="{Binding PlaylistViewModel}" />
+        <!--<userControls:PlaylistView Grid.Row="1" Grid.Column="1" />-->
     </Grid>
 </Window>
