@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.EntityFrameworkCore;
 using presenter.Messages;
 using presenter.Models;
 using presenter.Services;
@@ -15,13 +16,16 @@ namespace presenter.ViewModel
     public partial class MediaExplorerViewModel : IRecipient<ImportMessage>
     {
         private const string SEARCH_LABEL_DEFAULT = "Search...";
+        private readonly SongContext _songContext;
+        private readonly object _lockObject = new();
+
         [ObservableProperty]
         private string? _searchLabel = SEARCH_LABEL_DEFAULT;
         [ObservableProperty]
         private string? _searchText;
         [ObservableProperty]
         private Song? _selectedSong;
-        private readonly SongContext _songContext;
+
         public ObservableCollection<Song> Songs { get; set; }
         public CollectionViewSource FilteredSongs { get; set; } = new CollectionViewSource();
 
@@ -30,8 +34,9 @@ namespace presenter.ViewModel
             Messenger = messenger ?? throw new ArgumentNullException(nameof(messenger));
             _songContext = songContext ?? throw new ArgumentNullException(nameof(songContext));
             Messenger.Register(this);
-            
+
             RefreshSongs();
+            BindingOperations.EnableCollectionSynchronization(Songs, _lockObject); // allows the collection to be updated by another thread
             FilteredSongs.Source = Songs;
             FilteredSongs.View.Filter = SongFilter;
         }
@@ -55,7 +60,6 @@ namespace presenter.ViewModel
         public void SearchLabelClear()
         {
             SearchLabel = "";
-
         }
 
         private bool SongFilter(object item)
@@ -74,7 +78,8 @@ namespace presenter.ViewModel
 
         private void RefreshSongs()
         {
-            Songs = new ObservableCollection<Song>(_songContext.Songs);
+            _songContext.Songs.Load();
+            Songs = _songContext.Songs.Local.ToObservableCollection();
         }
 
         void IRecipient<ImportMessage>.Receive(ImportMessage message)

@@ -37,7 +37,11 @@ namespace presenter
                 services.AddSingleton<MainWindow>();
                 services.AddSingleton<PlaylistViewModel>();
                 services.AddSingleton<PlaylistView>();
-                services.AddDbContext<SongContext>(options => options.UseSqlite(@"Data Source=C:\Users\Caleb\Desktop\song_manager\Songs.db"));
+                //services.AddSingleton<Configuration>(new Configuration() { DbConnectionString = @"Data Source=C:\Users\Caleb\Desktop\song_manager\Songs.db" });
+                services.AddDbContext<SongContext>(options => {
+                    options.UseSqlite(@"Data Source=Songs.db");
+                    options.UseLazyLoadingProxies();
+                });
             });
     }
 
