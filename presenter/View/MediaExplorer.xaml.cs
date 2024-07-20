@@ -3,7 +3,7 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using presenter.ViewModel;
 
-namespace presenter.View.UserControls
+namespace presenter.View
 {
     /// <summary>
     /// Interaction logic for MediaExplorer.xaml
@@ -39,6 +39,11 @@ namespace presenter.View.UserControls
         {
             if (lvLibrary.SelectedIndex == 0 && e.Key == Key.Up)
                 txtSearch.Focus();
+            if (lvLibrary.SelectedIndex >= 0 && e.Key == Key.Enter)
+            {
+                ((MediaExplorerViewModel)DataContext).AddSelectedItemToPlaylist();
+                txtSearch.Focus();
+            }
         }
     }
 }

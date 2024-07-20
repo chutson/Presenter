@@ -5,7 +5,7 @@ using Microsoft.Extensions.Hosting;
 using presenter.ViewModel;
 using presenter.Services;
 using System.Windows;
-using presenter.View.UserControls;
+using presenter.View;
 
 namespace presenter
 {

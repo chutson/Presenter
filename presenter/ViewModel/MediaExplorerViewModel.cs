@@ -13,7 +13,7 @@ namespace presenter.ViewModel
 
     [ObservableObject]
     [ObservableRecipient]
-    public partial class MediaExplorerViewModel : IRecipient<ImportMessage>
+    public partial class MediaExplorerViewModel
     {
         private const string SEARCH_LABEL_DEFAULT = "Search...";
         private readonly SongContext _songContext;
@@ -33,9 +33,9 @@ namespace presenter.ViewModel
         {
             Messenger = messenger ?? throw new ArgumentNullException(nameof(messenger));
             _songContext = songContext ?? throw new ArgumentNullException(nameof(songContext));
-            Messenger.Register(this);
 
-            RefreshSongs();
+            _songContext.Songs.Load();
+            Songs = _songContext.Songs.Local.ToObservableCollection();
             BindingOperations.EnableCollectionSynchronization(Songs, _lockObject); // allows the collection to be updated by another thread
             FilteredSongs.Source = Songs;
             FilteredSongs.View.Filter = SongFilter;
@@ -74,17 +74,6 @@ namespace presenter.ViewModel
                 return song.Number != null && song.Number.StartsWith(SearchText);
 
             return song.Title != null && song.Title.StartsWith(SearchText, StringComparison.OrdinalIgnoreCase);
-        }
-
-        private void RefreshSongs()
-        {
-            _songContext.Songs.Load();
-            Songs = _songContext.Songs.Local.ToObservableCollection();
-        }
-
-        void IRecipient<ImportMessage>.Receive(ImportMessage message)
-        {
-            RefreshSongs();
         }
     }
 }

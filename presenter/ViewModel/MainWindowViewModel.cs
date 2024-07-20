@@ -4,7 +4,9 @@ using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Win32;
 using presenter.Messages;
 using presenter.Services;
+using System.Collections.ObjectModel;
 using System.Windows;
+using WpfScreenHelper;
 
 namespace presenter.ViewModel
 {
@@ -15,6 +17,13 @@ namespace presenter.ViewModel
         public MediaExplorerViewModel MediaExplorerViewModel { get; }
         public PlaylistViewModel PlaylistViewModel { get; }
         public SongContext SongContext { get; }
+
+        [ObservableProperty]
+        private int _importPercentProgress;
+
+        [ObservableProperty]
+        private ObservableCollection<Screen> _screens = new(Screen.AllScreens);
+
         public MainWindowViewModel(IMessenger messenger, MediaExplorerViewModel mediaExplorerViewModel, PlaylistViewModel playlistViewModel, SongContext songContext)
         {
             _messenger = messenger ?? throw new ArgumentNullException(nameof(messenger));
@@ -37,8 +46,8 @@ namespace presenter.ViewModel
             if (!result.HasValue || !result.Value)
                 return;
 
-            await ConvertAndSave(fileDialog.FileNames);
-            _messenger.Send<ImportMessage>();
+            var progress = new Progress<int>(percent => ImportPercentProgress = percent);
+            await ConvertAndSave(fileDialog.FileNames, progress);
             MessageBox.Show("Import Complete");
         }
 
@@ -61,13 +70,14 @@ namespace presenter.ViewModel
             _messenger.Send(new PresentationEventMessage(PresentationEventType.Stop));
         }
 
-        private async Task ConvertAndSave(string[] files)
+        private async Task ConvertAndSave(string[] files, IProgress<int> progress)
         {
-            await Task.Run(() => { foreach (string file in files)
+            await Task.Run(() => { for(var i = 0; i < files.Length; i++)
                 {
-                    var song = PptToBinaryConverter.ConvertToSong(file);
+                    var song = PptToBinaryConverter.ConvertToSong(files[i]);
                     SongContext.Add(song);
                     SongContext.SaveChanges();
+                    progress.Report(i / files.Length * 100);
                 }
             });
         }

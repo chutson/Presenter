@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:presenter"
-        xmlns:userControls="clr-namespace:presenter.View.UserControls"
+        xmlns:userControls="clr-namespace:presenter.View"
         xmlns:vm="clr-namespace:presenter.ViewModel"
         mc:Ignorable="d" KeyDown="MainWindow_KeyDown" WindowStyle="None"
         Title="Presenter" Height="600" Width="1000">
@@ -15,11 +15,13 @@
         <DataTemplate DataType="{x:Type vm:PlaylistViewModel}">
             <userControls:PlaylistView />
         </DataTemplate>
+        <CollectionViewSource Source="{Binding Screens}" x:Key="ScreenMenuItems" />
     </Window.Resources>
     <Grid Name="grdMain">
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
             <RowDefinition />
+            <RowDefinition Height="25" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" />
@@ -39,10 +41,21 @@
                     <MenuItem Header="E_xit" Command="{Binding ExitCommand}" />
                 </MenuItem>
                 <MenuItem Header="_Presentation">
-                    <MenuItem Header="_Start" Command="{Binding StartPresentationCommand}" InputGestureText="F5" />
-                    <!--<MenuItem Header="_Next" Command="{Binding NextCommand}" InputGestureText="→, ↓" />
+                    <MenuItem.ItemsSource>
+                        <CompositeCollection>
+                            <MenuItem Header="_Start" Command="{Binding StartPresentationCommand}" InputGestureText="F5" />
+                            <!--<MenuItem Header="_Next" Command="{Binding NextCommand}" InputGestureText="→, ↓" />
                     <MenuItem Header="_Previous" Command="{Binding PreviousCommand}" InputGestureText="←, ↑" />-->
-                    <MenuItem Header="_End" Command="{Binding EndCommand}" InputGestureText="esc" />
+                            <MenuItem Header="_End" Command="{Binding EndCommand}" InputGestureText="esc" />
+                            <Separator />
+                            <CollectionContainer Collection="{Binding Source={StaticResource ScreenMenuItems}}" />
+                        </CompositeCollection>
+                    </MenuItem.ItemsSource>
+                    <MenuItem.ItemContainerStyle>
+                        <Style>
+                            <Setter Property="MenuItem.Header" Value="{Binding DeviceName}"/>
+                        </Style>
+                    </MenuItem.ItemContainerStyle>
                 </MenuItem>
             </Menu>
         </Grid>
@@ -54,5 +67,6 @@
         <userControls:MediaExplorer x:Name="MediaExplorer" Grid.Row="1" Grid.Column="0" DataContext="{Binding MediaExplorerViewModel}" />
         <GridSplitter Grid.Row="1" Width="3" Height="Auto" HorizontalAlignment="Right" Grid.Column="0" />
         <!--<userControls:PlaylistView Grid.Row="1" Grid.Column="1" />-->
+        <ProgressBar Grid.Row="2" Value="{Binding ImportPercentProgress}" />
     </Grid>
 </Window>

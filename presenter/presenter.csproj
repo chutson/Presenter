@@ -45,4 +45,8 @@
     <PackageReference Include="WpfScreenHelper" Version="2.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="View\UserControls\" />
+  </ItemGroup>
+
 </Project>

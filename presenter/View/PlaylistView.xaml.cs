@@ -5,7 +5,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows;
 
-namespace presenter.View.UserControls
+namespace presenter.View
 {
     /// <summary>
     /// Interaction logic for Playlist.xaml

@@ -12,10 +12,10 @@
     <Compile Update="View\PresentationWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\UserControls\MediaExplorer.xaml.cs">
+    <Compile Update="View\MediaExplorer.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\UserControls\PlaylistView.xaml.cs">
+    <Compile Update="View\PlaylistView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -26,10 +26,10 @@
     <Page Update="View\PresentationWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\UserControls\MediaExplorer.xaml">
+    <Page Update="View\MediaExplorer.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\UserControls\PlaylistView.xaml">
+    <Page Update="View\PlaylistView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
