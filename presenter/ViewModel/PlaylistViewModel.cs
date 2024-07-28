@@ -3,8 +3,10 @@ using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using GongSolutions.Wpf.DragDrop;
 using presenter.Messages;
 using presenter.Models;
+using presenter.Utilities;
 using presenter.View;
 using WpfScreenHelper;
 
@@ -16,6 +18,8 @@ namespace presenter.ViewModel
     {
         private Screen _presentationScreen;
         private Window _presentationWindow;
+        private readonly IDragSource _dragHandler = new PlaylistDragHandler();
+        private readonly IDropTarget _dropHandler = new PlaylistDropHandler();
         public ObservableCollection<Song> Playlist { get; set; }
         public PlaylistViewModel(IMessenger messenger)
         {
@@ -34,6 +38,9 @@ namespace presenter.ViewModel
         {
             CurrentSlide = value.Slides.First();
         }
+
+        public IDragSource DragHandler { get { return _dragHandler; } }
+        public IDropTarget DropHandler { get { return _dropHandler; } }
 
         public void Receive(AddToPlaylistMessage message)
         {

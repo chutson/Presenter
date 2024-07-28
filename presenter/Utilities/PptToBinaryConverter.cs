@@ -2,7 +2,7 @@
 using Microsoft.Office.Interop.PowerPoint;
 using presenter.Models;
 
-namespace presenter
+namespace presenter.Utilities
 {
     static class PptToBinaryConverter
     {

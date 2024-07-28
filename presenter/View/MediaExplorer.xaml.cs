@@ -31,18 +31,19 @@ namespace presenter.View
 
         private void txtSearch_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Down)
-                lvLibrary.Focus();
+            if (e.Key != Key.Down)
+                return;
+
+            MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
         }
 
         private void lvLibrary_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (lvLibrary.SelectedIndex == 0 && e.Key == Key.Up)
-                txtSearch.Focus();
+                MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
             if (lvLibrary.SelectedIndex >= 0 && e.Key == Key.Enter)
             {
                 ((MediaExplorerViewModel)DataContext).AddSelectedItemToPlaylist();
-                txtSearch.Focus();
             }
         }
     }
