@@ -19,7 +19,7 @@ namespace presenter.View
             InitializeComponent();
         }
 
-        private void trvPlaylist_SelectedItemChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<object> e)
+        private void trvPlaylist_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             switch (e.NewValue)
             {

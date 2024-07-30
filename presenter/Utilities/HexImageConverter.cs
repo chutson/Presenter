@@ -2,7 +2,7 @@
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
-namespace presenter
+namespace presenter.Utilities
 {
     public class HexImageConverter : IValueConverter
     {
