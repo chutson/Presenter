@@ -9,7 +9,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using WpfScreenHelper;
 
-namespace presenter.ViewModel
+namespace presenter.ViewModels
 {
     [ObservableObject]
     public partial class MainWindowViewModel
@@ -86,6 +86,7 @@ namespace presenter.ViewModel
         [RelayCommand]
         private void Exit()
         {
+            SongContext.SaveChanges();
             Application.Current.Shutdown();
         }
     }

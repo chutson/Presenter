@@ -1,11 +1,11 @@
-﻿using presenter.ViewModel;
+﻿using presenter.ViewModels;
 using presenter.Models;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows;
 
-namespace presenter.View
+namespace presenter.Views
 {
     /// <summary>
     /// Interaction logic for Playlist.xaml
@@ -61,6 +61,11 @@ namespace presenter.View
         private void mniRemove_Click(object sender, RoutedEventArgs e)
         {
             _viewModel.RemoveFromPlaylistCommand.Execute(e);
+        }
+
+        private void mnuEnabled_Click(object sender, RoutedEventArgs e)
+        {
+            _viewModel.ToggleDisableSlideCommand.Execute(e);
         }
     }
 }

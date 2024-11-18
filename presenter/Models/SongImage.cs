@@ -12,6 +12,8 @@ namespace presenter.Models
         public string Verse { get; set; }
         public string ImageNumber { get; set; }
         public string Image {  get; set; }
+        [Column("Enabled")]
+        public bool Enabled { get; set; }
 
         public virtual Song Song { get; set; }
 

@@ -8,7 +8,7 @@ using presenter.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Data;
 
-namespace presenter.ViewModel
+namespace presenter.ViewModels
 {
 
     [ObservableObject]

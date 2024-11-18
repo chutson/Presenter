@@ -9,13 +9,13 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="View\PresentationWindow.xaml.cs">
+    <Compile Update="Views\PresentationWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\MediaExplorer.xaml.cs">
+    <Compile Update="Views\MediaExplorer.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\PlaylistView.xaml.cs">
+    <Compile Update="Views\PlaylistView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -23,13 +23,13 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\PresentationWindow.xaml">
+    <Page Update="Views\PresentationWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\MediaExplorer.xaml">
+    <Page Update="Views\MediaExplorer.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\PlaylistView.xaml">
+    <Page Update="Views\PlaylistView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

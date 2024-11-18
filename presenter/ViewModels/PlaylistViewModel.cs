@@ -7,10 +7,10 @@ using GongSolutions.Wpf.DragDrop;
 using presenter.Messages;
 using presenter.Models;
 using presenter.Utilities;
-using presenter.View;
+using presenter.Views;
 using WpfScreenHelper;
 
-namespace presenter.ViewModel
+namespace presenter.ViewModels
 {
     [ObservableObject]
     [ObservableRecipient]
@@ -36,7 +36,7 @@ namespace presenter.ViewModel
 
         partial void OnSelectedSongChanged(Song value)
         {
-            CurrentSlide = value.Slides.First();
+            CurrentSlide = value.Slides.FirstOrDefault();
         }
 
         public IDragSource DragHandler { get { return _dragHandler; } }
@@ -44,7 +44,9 @@ namespace presenter.ViewModel
 
         public void Receive(AddToPlaylistMessage message)
         {
-            Playlist.Add(message.Song);
+            if (Playlist.Count == 0)
+                Playlist.Add(new Song { Title = "End" });
+            Playlist.Insert(Playlist.Count - 1, message.Song);
         }
 
         void IRecipient<PresentationEventMessage>.Receive(PresentationEventMessage message)
@@ -94,6 +96,14 @@ namespace presenter.ViewModel
         private void RemoveFromPlaylist()
         {
             Playlist.Remove(SelectedSong);
+            if (Playlist.Count == 1 && SelectedSong.Title == "End")
+                Playlist.Remove(Playlist.First(s => s.Title == "End"));
+        }
+
+        [RelayCommand]
+        private void ToggleDisableSlide()
+        {
+            CurrentSlide.Enabled = !CurrentSlide.Enabled;
         }
     }
 }

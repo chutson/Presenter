@@ -1,9 +1,8 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
-using CommunityToolkit.Mvvm.Messaging;
-using presenter.ViewModel;
+using presenter.ViewModels;
 
-namespace presenter.View
+namespace presenter.Views
 {
     /// <summary>
     /// Interaction logic for MediaExplorer.xaml
@@ -23,7 +22,7 @@ namespace presenter.View
             InitializeComponent();
         }
 
-        private void lvLibrary_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void lvLibrary_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ((MediaExplorerViewModel)DataContext).AddSelectedItemToPlaylist();
             txtSearch.Focus();
