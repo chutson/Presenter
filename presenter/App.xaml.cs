@@ -2,10 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using presenter.ViewModel;
+using presenter.ViewModels;
 using presenter.Services;
 using System.Windows;
-using presenter.View;
+using presenter.Views;
 
 namespace presenter
 {

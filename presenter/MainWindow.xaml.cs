@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using presenter.View;
-using presenter.ViewModel;
+using presenter.Views;
+using presenter.ViewModels;
 
 namespace presenter
 {

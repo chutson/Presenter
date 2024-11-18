@@ -1,8 +1,8 @@
-﻿using presenter.ViewModel;
+﻿using presenter.ViewModels;
 using System.Windows;
 using System.Windows.Navigation;
 
-namespace presenter.View
+namespace presenter.Views
 {
     /// <summary>
     /// Interaction logic for PresentationWindow.xaml
