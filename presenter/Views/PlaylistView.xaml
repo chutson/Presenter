@@ -42,7 +42,7 @@
                                     <Setter Property="Foreground" Value="Black" />
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding Path=Enabled}" Value="False">
-                                    <Setter Property="Foreground" Value="Gray" />
+                                    <Setter Property="Foreground" Value="LightGray" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -53,7 +53,7 @@
                     <TextBlock Text="{Binding}">
                         <TextBlock.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Enabled" IsCheckable="True" IsChecked="{Binding Enabled}" Click="mnuEnabled_Click" />
+                                <MenuItem Header="Enabled" IsCheckable="True" IsChecked="{Binding Enabled}" />
                             </ContextMenu>
                         </TextBlock.ContextMenu>
                     </TextBlock>
