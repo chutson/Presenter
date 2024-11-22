@@ -99,11 +99,5 @@ namespace presenter.ViewModels
             if (Playlist.Count == 1 && SelectedSong.Title == "End")
                 Playlist.Remove(Playlist.First(s => s.Title == "End"));
         }
-
-        [RelayCommand]
-        private void ToggleDisableSlide()
-        {
-            CurrentSlide.Enabled = !CurrentSlide.Enabled;
-        }
     }
 }

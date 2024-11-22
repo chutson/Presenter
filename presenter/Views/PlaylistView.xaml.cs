@@ -62,10 +62,5 @@ namespace presenter.Views
         {
             _viewModel.RemoveFromPlaylistCommand.Execute(e);
         }
-
-        private void mnuEnabled_Click(object sender, RoutedEventArgs e)
-        {
-            _viewModel.ToggleDisableSlideCommand.Execute(e);
-        }
     }
 }
