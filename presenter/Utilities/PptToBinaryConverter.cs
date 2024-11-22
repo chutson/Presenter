@@ -43,7 +43,7 @@ namespace presenter.Utilities
                 var index = 1;
                 foreach (FileInfo imageFile in tempDir.GetFiles().OrderBy(f => Convert.ToInt32(f.Name)))
                 {
-                    var songImage = new SongImage() { Verse = "1", ImageNumber = imageFile.Name };
+                    var songImage = new SongImage() { Verse = "1", ImageNumber = imageFile.Name, Enabled = true };
                     var imageBytes = File.ReadAllBytes(imageFile.FullName);
                     songImage.Image = Convert.ToHexString(imageBytes);
 
