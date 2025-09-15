@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="Presenter.WPF.Views.PlaylistView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Presenter.WPF.Views"
+             xmlns:models="clr-namespace:Presenter.Models;assembly=Presenter.Models"
+             xmlns:presenter="clr-namespace:Presenter.WPF"
+             xmlns:utilities="clr-namespace:Presenter.WPF.Utilities"
+             xmlns:dd="urn:gong-wpf-dragdrop"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <utilities:HexImageConverter x:Key="HexImageConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Name="tbHeader" Text="Playlist" Background="DarkGray" FontWeight="Bold" Padding="5,2,0,0" VerticalAlignment="Stretch" />
+        <TreeView Grid.Row="1" Grid.Column="0" Name="trvPlaylist" ItemsSource="{Binding Playlist}" SelectedItemChanged="trvPlaylist_SelectedItemChanged" PreviewMouseRightButtonDown="trvPlaylist_PreviewMouseRightButtonDown" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DragHandler="{Binding DragHandler}" dd:DragDrop.DropHandler="{Binding DropHandler}" VerticalAlignment="Stretch">
+            <TreeView.Resources>
+                <!-- song level -->
+                <HierarchicalDataTemplate DataType="{x:Type models:Song}" ItemsSource="{Binding Slides}">
+                    <TextBlock Text="{Binding}">
+                        <TextBlock.ContextMenu>
+                            <ContextMenu> 
+                                <MenuItem Header="Remove" Click="mniRemove_Click" />
+                            </ContextMenu>
+                        </TextBlock.ContextMenu>
+                    </TextBlock>
+                    <HierarchicalDataTemplate.ItemContainerStyle>
+                        <Style TargetType="TreeViewItem">
+                            <Setter Property="Focusable" Value="{Binding Enabled}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=Enabled}" Value="True">
+                                    <Setter Property="Foreground" Value="Black" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Path=Enabled}" Value="False">
+                                    <Setter Property="Foreground" Value="LightGray" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </HierarchicalDataTemplate.ItemContainerStyle>
+                </HierarchicalDataTemplate>
+                <!-- slide level -->
+                <HierarchicalDataTemplate DataType="{x:Type models:SongImage}">
+                    <TextBlock Text="{Binding}">
+                        <TextBlock.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Enabled" IsCheckable="True" IsChecked="{Binding Enabled}" />
+                            </ContextMenu>
+                        </TextBlock.ContextMenu>
+                    </TextBlock>
+                </HierarchicalDataTemplate>
+            </TreeView.Resources>
+        </TreeView>
+        <GridSplitter Grid.Row="0" Width="3" Grid.RowSpan="2" Height="Auto" HorizontalAlignment="Right" Grid.Column="0" />
+        <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Background="White">
+            <Image Name="imgContent" Source="{Binding CurrentSlide.Image, Converter={StaticResource HexImageConverter}}" />
+        </Grid>
+    </Grid>
+</UserControl>

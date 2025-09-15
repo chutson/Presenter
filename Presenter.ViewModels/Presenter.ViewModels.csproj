@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Presenter.Common\Common.Library.csproj" />
+    <ProjectReference Include="..\Presenter.Models\Presenter.Models.csproj" />
+    <ProjectReference Include="..\Presenter.Services\Presenter.Services.csproj" />
+  </ItemGroup>
+
+</Project>
