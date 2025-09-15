@@ -48,6 +48,6 @@
         </Menu>
         <userControls:MediaExplorer x:Name="MediaExplorer" Grid.Row="1" Grid.Column="0" DataContext="{Binding MediaExplorerViewModel}" />
         <GridSplitter Width="3" Height="Auto" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" />
-        <userControls:PlaylistView Grid.Row="1" Grid.Column="1" />
+        <!--<userControls:PlaylistView Grid.Row="1" Grid.Column="1" />-->
     </Grid>
 </Window>

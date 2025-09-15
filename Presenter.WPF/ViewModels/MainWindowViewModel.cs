@@ -86,7 +86,7 @@ namespace Presenter.WPF.ViewModels
         [RelayCommand]
         private void Exit()
         {
-            SongContext.SaveChanges();
+            //await SongContext.SaveChangesAsync();
             Application.Current.Shutdown();
         }
     }

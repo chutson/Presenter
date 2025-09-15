@@ -32,14 +32,14 @@ namespace Presenter.WPF
             .ConfigureServices((hostContext, services) =>
             {
                 services.AddSingleton<IMessenger, WeakReferenceMessenger>();
-                services.AddSingleton<MainWindowViewModel>();
                 services.AddSingleton<MediaExplorerViewModel>();
-                services.AddSingleton<MainWindow>();
                 services.AddSingleton<PlaylistViewModel>();
                 services.AddSingleton<PlaylistView>();
+                services.AddSingleton<MainWindowViewModel>();
+                services.AddSingleton<MainWindow>();
                 //services.AddSingleton<Configuration>(new Configuration() { DbConnectionString = @"Data Source=C:\Users\Caleb\Desktop\song_manager\Songs.db" });
                 services.AddDbContext<SongContext>(options => {
-                    options.UseSqlite(@"Data Source=C:\Songs.db");
+                    options.UseSqlite(@"Data Source=Songs.db");
                     options.UseLazyLoadingProxies();
                 });
             });

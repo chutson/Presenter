@@ -17,7 +17,7 @@ namespace Presenter.WPF
             DataContext = _viewModel = viewModel;
             InitializeComponent();
 
-            //grdMain.Children.Add(playlistView);
+            grdMain.Children.Add(playlistView);
             Grid.SetRow(playlistView, 1);
             Grid.SetColumn(playlistView, 1);
         }
