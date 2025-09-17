@@ -1,6 +1,6 @@
 ﻿using System.IO;
-//using Microsoft.Office.Interop.PowerPoint;
 using Presenter.Models;
+using Microsoft.Office.Interop.PowerPoint;
 
 namespace Presenter.WPF.Utilities
 {
@@ -23,38 +23,35 @@ namespace Presenter.WPF.Utilities
                 Title = filename
             };
 
-            //// create a temp directory to hold image files
-            //var tempDir = Directory.CreateTempSubdirectory();
+            // create a temp directory to hold image files
+            var tempDir = Directory.CreateTempSubdirectory();
 
-            //try
-            //{
-            //    // export slides as images
-            //    var ppApp = new Application();
-            //    var presentation = ppApp.Presentations.Open(file, 0, 0, 0);
-            //    for (var i = 1; i <= presentation.Slides.Count; i++)
-            //    {
-            //        presentation.Slides[i].Export(Path.Join(tempDir.FullName, i.ToString()), "PNG", 1024, 768);
-            //    }
+            try
+            {
+                // export slides as images
+                var ppApp = new Application();
+                var presentation = ppApp.Presentations.Open(file, 0, 0, 0);
+                for (var i = 1; i <= presentation.Slides.Count; i++)
+                {
+                    presentation.Slides[i].Export(Path.Join(tempDir.FullName, i.ToString()), "PNG", 1024, 768);
+                }
+                presentation.Close();
+                ppApp.Quit();
 
-            //    presentation.Close();
-            //    ppApp.Quit();
+                // convert slide images to hex string and add to song
+                foreach (FileInfo imageFile in tempDir.GetFiles().OrderBy(f => Convert.ToInt32(f.Name)))
+                {
+                    var songImage = new SongImage() { Verse = "1", ImageNumber = imageFile.Name, Enabled = true };
+                    var imageBytes = File.ReadAllBytes(imageFile.FullName);
+                    songImage.Image = Convert.ToHexString(imageBytes);
 
-            //    // convert slide images to hex string and add to song
-            //    var index = 1;
-            //    foreach (FileInfo imageFile in tempDir.GetFiles().OrderBy(f => Convert.ToInt32(f.Name)))
-            //    {
-            //        var songImage = new SongImage() { Verse = "1", ImageNumber = imageFile.Name, Enabled = true };
-            //        var imageBytes = File.ReadAllBytes(imageFile.FullName);
-            //        songImage.Image = Convert.ToHexString(imageBytes);
-
-            //        song.Slides.Add(songImage);
-            //        index++;
-            //    }
-            //}
-            //finally
-            //{
-            //    tempDir.Delete(true);
-            //}
+                    song.Slides.Add(songImage);
+                }
+            }
+            finally
+            {
+                tempDir.Delete(true);
+            }
             return song;
         }
 
@@ -62,17 +59,17 @@ namespace Presenter.WPF.Utilities
         /// Update a .ppt file to .pptx
         /// </summary>
         /// <param name="dir"></param>
-        public static void UpgradeToPptx(string dir)
-        {
-            //var ppApp = new Application();
-            //foreach (var file in Directory.GetFiles(dir).Where(f => f.EndsWith(".ppt")))
-            //{
-            //    var newFileName = $"{Path.GetFileNameWithoutExtension(file)}.pptx";
-            //    var presentation = ppApp.Presentations.Open(file, 0, 0, 0);
-            //    presentation.SaveAs(Path.Join(dir, newFileName), PpSaveAsFileType.ppSaveAsOpenXMLPresentation);
-            //    presentation.Close();
-            //}
-            //ppApp.Quit();
-        }
+        //public static void UpgradeToPptx(string dir)
+        //{
+        //    var ppApp = new Application();
+        //    foreach (var file in Directory.GetFiles(dir).Where(f => f.EndsWith(".ppt")))
+        //    {
+        //        var newFileName = $"{Path.GetFileNameWithoutExtension(file)}.pptx";
+        //        var presentation = ppApp.Presentations.Open(file, 0, 0, 0);
+        //        presentation.SaveAs(Path.Join(dir, newFileName), PpSaveAsFileType.ppSaveAsOpenXMLPresentation);
+        //        presentation.Close();
+        //    }
+        //    ppApp.Quit();
+        //}
     }
 }
