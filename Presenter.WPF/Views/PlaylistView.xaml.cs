@@ -63,5 +63,26 @@ namespace Presenter.WPF.Views
         {
             _viewModel.RemoveFromPlaylistCommand.Execute(e);
         }
+
+        private void btnCollapse_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleTreeViewExpansion(trvPlaylist, false);
+        }
+
+        private void btnExpand_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleTreeViewExpansion(trvPlaylist, true);
+        }
+
+        private void ToggleTreeViewExpansion(TreeView tv, bool doExpand)
+        {
+            foreach (var item in tv.Items)
+            {
+                if (tv.ItemContainerGenerator.ContainerFromItem(item) is TreeViewItem tvi)
+                {
+                    tvi.IsExpanded = doExpand;
+                }
+            }
+        }
     }
 }

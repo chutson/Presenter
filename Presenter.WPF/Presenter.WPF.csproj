@@ -6,10 +6,14 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <PackageIcon>presenter.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <ApplicationDefinition Remove="App.xaml" />
+    <None Remove="Resources\Images\collapse-all.png" />
+    <None Remove="Resources\Images\expand-all.png" />
+    <None Remove="Resources\Images\presenter.ico" />
 	  <Page Include="App.xaml" />
   </ItemGroup>
   
@@ -33,6 +37,10 @@
       <EmbedInteropTypes>true</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  
+  <ItemGroup>
+    <Resource Include="Resources\Images\presenter.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
@@ -51,6 +59,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\collapse-all.png" />
+    <Resource Include="Resources\Images\expand-all.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Views\MediaExplorer.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -60,6 +73,13 @@
     <Compile Update="Views\PresentationWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\Images\presenter.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -16,6 +16,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
+            <RowDefinition Height="25" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -23,7 +24,19 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Name="tbHeader" Text="Playlist" Background="DarkGray" FontWeight="Bold" Padding="5,2,0,0" VerticalAlignment="Stretch" />
-        <TreeView Grid.Row="1" Grid.Column="0" Name="trvPlaylist" ItemsSource="{Binding Playlist}" SelectedItemChanged="trvPlaylist_SelectedItemChanged" PreviewMouseRightButtonDown="trvPlaylist_PreviewMouseRightButtonDown" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DragHandler="{Binding DragHandler}" dd:DragDrop.DropHandler="{Binding DropHandler}" VerticalAlignment="Stretch">
+        <Grid Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" Background="#DDDDDD" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="24" />
+                <ColumnDefinition Width="24" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Name="btnExpand" ToolTip="Expand All" Click="btnExpand_Click" Width="23" Height="23" Background="Transparent">
+                <Image Source="/Resources/Images/expand-all.png" />
+            </Button>
+            <Button Grid.Column="1" Name="btnCollapse" ToolTip="Collapse All" Click="btnCollapse_Click" Width="23" Height="23" Background="Transparent">
+                <Image Source="/Resources/Images/collapse-all.png" />
+            </Button>
+        </Grid>
+        <TreeView Grid.Row="2" Grid.Column="0" Name="trvPlaylist" ItemsSource="{Binding Playlist}" SelectedItemChanged="trvPlaylist_SelectedItemChanged" PreviewMouseRightButtonDown="trvPlaylist_PreviewMouseRightButtonDown" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DragHandler="{Binding DragHandler}" dd:DragDrop.DropHandler="{Binding DropHandler}" VerticalAlignment="Stretch">
             <TreeView.Resources>
                 <!-- song level -->
                 <HierarchicalDataTemplate DataType="{x:Type models:Song}" ItemsSource="{Binding Slides}">
@@ -60,8 +73,8 @@
                 </HierarchicalDataTemplate>
             </TreeView.Resources>
         </TreeView>
-        <GridSplitter Grid.Row="0" Width="3" Grid.RowSpan="2" Height="Auto" HorizontalAlignment="Right" Grid.Column="0" />
-        <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Background="White">
+        <GridSplitter Grid.Row="0" Grid.Column="0" Width="3" Grid.RowSpan="3" Height="Auto" HorizontalAlignment="Right" />
+        <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Background="White">
             <Image Name="imgContent" Source="{Binding CurrentSlide.Image, Converter={StaticResource HexImageConverter}}" />
         </Grid>
     </Grid>

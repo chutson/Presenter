@@ -10,7 +10,6 @@ namespace Presenter.WPF.Utilities
         {
             if (dropInfo.TargetCollection is List<SongImage> || dropInfo.TargetItem is SongImage) return;
 
-
             base.DragOver(dropInfo);
         }
 

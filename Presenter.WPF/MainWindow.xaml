@@ -7,7 +7,7 @@
         xmlns:userControls="clr-namespace:Presenter.WPF.Views"
         xmlns:vm="clr-namespace:Presenter.WPF.ViewModels"
         mc:Ignorable="d" KeyDown="MainWindow_KeyDown" Closing="Window_Closing"
-        Title="Presenter" Height="600" Width="1000">
+        Title="Presenter" Height="600" Width="1000" Icon="/Resources/Images/presenter.ico">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:PlaylistViewModel}">
             <userControls:PlaylistView />
