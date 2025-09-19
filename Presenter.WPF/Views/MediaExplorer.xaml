@@ -23,7 +23,7 @@
                 <TextBox x:Name="txtSearch" Height="25" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" FontSize="16" BorderThickness="0" Background="Transparent" PreviewKeyDown="txtSearch_PreviewKeyDown" />
                 <TextBlock Name="txtSearchlabel" Height="25" Text="{Binding SearchLabel}" Foreground="DarkGray" FontSize="16" FontStyle="Italic" VerticalAlignment="Center" Background="Transparent" Padding="3,0,0,0" Panel.ZIndex="-1" />
             </Grid>
-            <ListView Name="lvLibrary" DockPanel.Dock="Top" ItemContainerStyle="{StaticResource itemStyle}" ItemsSource="{Binding FilteredSongs.View}" SelectedItem="{Binding SelectedSong}" dd:DragDrop.IsDragSource="True" PreviewKeyDown="lvLibrary_PreviewKeyDown" />
+            <ListView Name="lvLibrary" DockPanel.Dock="Top" ItemContainerStyle="{StaticResource itemStyle}" ItemsSource="{Binding FilteredSongs.View}" SelectedItem="{Binding SelectedSong}" dd:DragDrop.IsDragSource="True" dd:DragDrop.DragDropCopyKeyState="LeftMouseButton" PreviewKeyDown="lvLibrary_PreviewKeyDown" />
         </DockPanel>
     </Grid>
 </UserControl>
