@@ -6,6 +6,7 @@ using Presenter.Models;
 using Presenter.Services;
 using Presenter.Services.Messages;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Data;
 
 namespace Presenter.WPF.ViewModels
@@ -34,7 +35,17 @@ namespace Presenter.WPF.ViewModels
             Messenger = messenger ?? throw new ArgumentNullException(nameof(messenger));
             _songContext = songContext ?? throw new ArgumentNullException(nameof(songContext));
 
-            _songContext.Songs.Load();
+            try
+            {
+                _songContext.Songs.Load();
+            }
+            catch (Exception ex)
+            {
+                // Show the error loading the database, then let the app crash
+                MessageBox.Show($"Error loading songs: {ex.Message}");
+                throw;
+            }
+
             Songs = _songContext.Songs.Local.ToObservableCollection();
             BindingOperations.EnableCollectionSynchronization(Songs, _lockObject); // allows the collection to be updated by another thread
             FilteredSongs.Source = Songs;
