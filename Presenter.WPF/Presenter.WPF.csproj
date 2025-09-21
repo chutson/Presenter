@@ -7,6 +7,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <PackageIcon>presenter.png</PackageIcon>
+    <ApplicationIcon>Resources\Images\presenter.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +15,7 @@
     <None Remove="Resources\Images\collapse-all.png" />
     <None Remove="Resources\Images\expand-all.png" />
     <None Remove="Resources\Images\presenter.ico" />
+    <None Remove="Resources\Images\presenter.png" />
 	  <Page Include="App.xaml" />
   </ItemGroup>
   
@@ -61,6 +63,10 @@
   <ItemGroup>
     <Resource Include="Resources\Images\collapse-all.png" />
     <Resource Include="Resources\Images\expand-all.png" />
+    <Resource Include="Resources\Images\presenter.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -73,13 +79,6 @@
     <Compile Update="Views\PresentationWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Resources\Images\presenter.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
   </ItemGroup>
 
 </Project>

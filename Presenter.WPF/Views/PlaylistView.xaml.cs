@@ -14,6 +14,11 @@ namespace Presenter.WPF.Views
     {
         private PlaylistViewModel _viewModel { get; }
 
+        public PlaylistView()
+        {
+            DataContext = _viewModel = new PlaylistViewModel(null);
+            InitializeComponent();
+        }
         public PlaylistView(PlaylistViewModel viewModel)
         {
             DataContext = _viewModel = viewModel;

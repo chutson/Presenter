@@ -37,11 +37,23 @@ namespace Presenter.WPF
                 services.AddSingleton<PlaylistView>();
                 services.AddSingleton<MainWindowViewModel>();
                 services.AddSingleton<MainWindow>();
-                //services.AddSingleton<Configuration>(new Configuration() { DbConnectionString = @"Data Source=C:\Users\Caleb\Desktop\song_manager\Songs.db" });
                 services.AddDbContext<SongContext>(options => {
-                    options.UseSqlite(@"Data Source=Songs.db");
+                    options.UseSqlite(LoadSettings().DbConnectionString);
                     options.UseLazyLoadingProxies();
                 });
             });
+
+        private static PresenterSettings LoadSettings()
+        {
+            return new PresenterSettings
+            {
+                DbConnectionString = System.Configuration.ConfigurationManager.AppSettings["DbConnectionString"] ?? "Data Source=Songs.db"
+            };
+        }
+    }
+
+    class PresenterSettings
+    {
+        public string DbConnectionString { get; set; } = string.Empty;
     }
 }
