@@ -42,7 +42,7 @@ namespace Presenter.WPF.ViewModels
             catch (Exception ex)
             {
                 // Show the error loading the database, then let the app crash
-                MessageBox.Show($"Error loading songs: {ex.Message}");
+                MessageBox.Show($"Error loading songs: {ex.Message}{Environment.NewLine}Check Presenter.WPF.dll.config");
                 throw;
             }
 
@@ -82,7 +82,7 @@ namespace Presenter.WPF.ViewModels
                 return false;
 
             if (int.TryParse(SearchText, out _))
-                return song.Number != null && song.Number.StartsWith(SearchText);
+                return song.Number != null && song.Number.StartsWith(SearchText) || (song.Title != null && song.Title.StartsWith(SearchText, StringComparison.OrdinalIgnoreCase));
 
             return song.Title != null && song.Title.StartsWith(SearchText, StringComparison.OrdinalIgnoreCase);
         }
