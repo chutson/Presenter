@@ -65,11 +65,25 @@
                 <HierarchicalDataTemplate DataType="{x:Type models:SongImage}">
                     <TextBlock Text="{Binding}">
                         <TextBlock.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Enabled" IsCheckable="True" IsChecked="{Binding Enabled}" />
+                            <ContextMenu Opened="FullVerseContextMenu_Opened">
+                                <MenuItem Header="Enabled" IsCheckable="True" IsChecked="{Binding Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <MenuItem x:Name="mniToggleFullVerse" Header="Enable Full Verse" Click="mniToggleFullVerse_Click" />
                             </ContextMenu>
                         </TextBlock.ContextMenu>
                     </TextBlock>
+                    <HierarchicalDataTemplate.ItemContainerStyle>
+                        <Style TargetType="TreeViewItem">
+                            <Setter Property="Focusable" Value="True" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=Enabled}" Value="True">
+                                    <Setter Property="Foreground" Value="Black" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Path=Enabled}" Value="False">
+                                    <Setter Property="Foreground" Value="LightGray" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </HierarchicalDataTemplate.ItemContainerStyle>
                 </HierarchicalDataTemplate>
             </TreeView.Resources>
         </TreeView>
