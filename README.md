@@ -19,15 +19,7 @@ It is designed for churches and live worship settings where slides can be groupe
 
 ### Playlist management
 
-
-
-### Presentation display
-
-
-
-### Verse toggle workflow
-
-
+https://github.com/user-attachments/assets/053bad62-2858-41fd-a80d-7f163a46aeb5
 
 ## Project structure
 
@@ -39,12 +31,12 @@ It is designed for churches and live worship settings where slides can be groupe
 ## Requirements
 
 ### Run-time
-- 
+
 - Windows 10/11
 - PowerPoint installed for import workflow
-- 
-- ### Development
-- 
+  
+### Development
+  
 - .NET 8 SDK
 - Visual Studio 2022 with .NET desktop development workload
 - PowerPoint installed for import workflow
@@ -72,13 +64,6 @@ It is designed for churches and live worship settings where slides can be groupe
 3. Use the playlist context menu to enable/disable individual slides or full verses
 4. Start the presentation from the main window
 5. Use the secondary presentation display for audience playback
-
-## Roadmap
-
-- Improved slide editing and reordering
-- Additional media format support
-- Better presentation timing controls
-- Export/import playlist data
 
 ## License
 
